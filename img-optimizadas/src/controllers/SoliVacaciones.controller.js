@@ -19,7 +19,7 @@ function crearSoliVacaciones(req,res){
             return res.status(404).send({message:'no se pudo guardar'})
         }
     })
-} 
+}
 
 
 function obtenerSoliVacacionesxIdentidad(req,res){
