@@ -106,7 +106,7 @@ function Login(req, res) {
     } else {
       return res
         .status(200)
-        .send({ message: "Error, el correo no se encuentra registrado." });
+        .send({ message: "El usuario no se encuentra registrado." });
     }
   });
 }

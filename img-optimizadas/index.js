@@ -19,7 +19,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Se ha conectado correctamente a la base de datos.");
+    console.log("DB ok!");
     app.listen(PORT,IP , () => {
       console.log('================================================== ' + PORT)
     })

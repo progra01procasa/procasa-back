@@ -23,7 +23,7 @@ function crearSoliVacaciones(req,res){
 
 
 function obtenerSoliVacacionesxIdentidad(req,res){
-let idUser = req.user.sub;
+let idUser = req.user.sub
 
 SoliVacaciones.find({Usuario:idUser},(err,SoliVacacionesFinded)=>{
     if(err){
