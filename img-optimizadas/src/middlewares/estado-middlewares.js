@@ -10,6 +10,36 @@ exports.VerPeticion = async function(req, res, next) {
     return next();
   }
 
+exports. VerPeticion = function (req, res, next) {
+
+  if(req.originalUrl === '/api/login'){
+
+
+  }else{
+
+
+
+    if (req.method === 'PUT' || req.method === 'POST' || req.method === 'DELETE') {
+
+
+      // Actualizar la disponibilidad
+      Estados.updateOne({},{estado:'disponible'},{new:true, upsert:true},(err,estadoUpdates)=>{
+        if(err){
+          console.log('error al actializar',err);
+        }else if(estadoUpdates){
+         console.log( 'se actualizo correctamente');
+        }else{
+          console.log('No se encontro el estado');
+        }
+      })
+      // Guardar la información de la petición en la tabla de estado
+      const nuevaPeticion = {
+        metodo: req.method,
+        ruta: req.originalUrl,
+        fecha: new Date()
+      };
+
+
   if (['PUT', 'POST', 'DELETE'].includes(req.method)) {
     try {
       await Estados.updateOne({}, { estado: 'disponible' }, { new: true, upsert: true });

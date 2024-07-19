@@ -28,7 +28,6 @@ const Departametos = require('./src/routes/departamento.routes');
 
 
 // MIDDLEWARES
-app.use(VerPeticion.VerPeticion);
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 app.use(express.json());

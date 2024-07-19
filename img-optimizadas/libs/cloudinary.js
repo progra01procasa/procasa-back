@@ -7,4 +7,6 @@ cloudinary.config({
   // Account Progra01 Server
 })
 
+});
+
 module.exports = cloudinary;
