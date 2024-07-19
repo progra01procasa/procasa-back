@@ -143,6 +143,7 @@ function Login(req, res) {
     }
   });
 }
+
 function crearGerente(req, res) {
   let parametros = req.body;
   let usuarioModel = new Usuario();
