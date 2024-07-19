@@ -11,4 +11,3 @@ const mainPageSchema = Schema({
 });
 
 module.exports = mongoose.model("mainPage", mainPageSchema);
- 

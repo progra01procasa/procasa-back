@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 const app = require("./app");
-
-
 const usuarioController = require("./src/controllers/users.controller");
 const lineaController = require("./src/controllers/lineaTiempo.controller");
 const noticasController = require("./src/controllers/noticias.controller");
@@ -23,24 +21,16 @@ mongoose.set('strictQuery', false);  // Añade esta línea para evitar la advert
 
 
 mongoose
-  .connect('mongodb+srv://anderson:anderson@cluster0.wh2v3jf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
-
-    // mongodb+srv://progra01:procasa%40progra01@procasadev.wxejimf.mongodb.net/    Progra01
-
+  .connect('mongodb+srv://desjr:desjr@cluster0.qmiwvug.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
     //'mongodb://localhost/procasa'
     //mongodb+srv://desjr:desjr@cluster0.qmiwvug.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
         //mongodb+srv://desjr:desjr@interno.g3fzrlc.mongodb.net/?retryWrites=true&w=majority&appName=Interno
-  // .connect('mongodb+srv://desjr:desjr@cluster0.qmiwvug.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0/', {
+
 
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("DB ok!");
-    app.listen(PORT,IP , () => {
-      console.log('================================================== ' + PORT)
-    })
-
     console.log("Se ha conectado correctamente a la base de datos.");
     const PORT = process.env.PORT || 3000  ;
     app.listen(PORT, function () {

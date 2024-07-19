@@ -5,11 +5,6 @@ const Cola = require('../models/cola.model');
 const mongoose2 = require('mongoose');
 
 
-exports.VerPeticion = async function(req, res, next) {
-  if (req.originalUrl === '/api/login') {
-    return next();
-  }
-
 exports. VerPeticion = function (req, res, next) {
 
   if(req.originalUrl === '/api/login'){
@@ -39,49 +34,40 @@ exports. VerPeticion = function (req, res, next) {
         fecha: new Date()
       };
 
+      // Guardar el cuerpo de la respuesta en res.locals.responseBody
+      const originalSend = res.send;
+      res.send = function (body) {
+        res.locals.responseBody = body;
+        originalSend.apply(res, arguments);
+      };
 
-  if (['PUT', 'POST', 'DELETE'].includes(req.method)) {
-    try {
-      await Estados.updateOne({}, { estado: 'disponible' }, { new: true, upsert: true });
-      console.log('Estado actualizado correctamente');
-    } catch (err) {
-      console.log('Error al actualizar estado:', err);
-    }
-
-    const nuevaPeticion = {
-      metodo: req.method,
-      ruta: req.originalUrl,
-      fecha: new Date(),
-      estado: 'pendiente',
-      token: req.headers.authorization
-    };
-
-    const originalSend = res.send;
-    res.send = function (body) {
-      res.locals.responseBody = body;
-      originalSend.apply(res, arguments);
-    };
-
-    res.on('finish', async function() {
-      let respuesta = res.locals.responseBody;
-      if (typeof respuesta === 'string') {
-        try {
-          respuesta = JSON.parse(respuesta);
-        } catch (error) {
-          // Mantener como cadena de texto
+      // Capturar la respuesta de la petición
+      res.on('finish', function() {
+        // Convertir la respuesta a un objeto si es una cadena de texto
+        let respuesta = res.locals.responseBody;
+        if (typeof respuesta === 'string') {
+          try {
+            respuesta = JSON.parse(respuesta);
+          } catch (error) {
+            // Si hay un error al analizar JSON, se mantiene como cadena de texto
+          }
         }
-      }
-      nuevaPeticion.respuesta = respuesta;
-      try {
-        await Cola.findOneAndUpdate({}, { $push: { cola: nuevaPeticion } }, { upsert: true });
-        console.log('Petición guardada en la cola');
-      } catch (error) {
-        console.error('Error al guardar la petición en la cola:', error);
-      }
-    });
+        // Guardar la respuesta en la cola
+        nuevaPeticion.respuesta = respuesta;
+        // Guardar la nueva petición en la base de datos
+        Cola.findOneAndUpdate({}, {$push: { cola: nuevaPeticion } }, { upsert: true })
+          .then(() => {
+            console.log('Peticion guardada en la cola');
+          })
+          .catch(error => {
+            console.error('Error al guardar la petición en la cola:', error);
+          });
+      });
+    }
   }
-  next();
+   next();
 };
+
 const Estado2 = require('../models/estados.model');
 const { es } = require('date-fns/locale');
 
