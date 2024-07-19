@@ -366,3 +366,5 @@ module.exports = {
   login2,
   RegistrarEmpleado
 };
+
+}

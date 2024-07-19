@@ -36,7 +36,6 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
- forHostingRender(cliente
     console.log("DB ok!");
     app.listen(PORT,IP , () => {
       console.log('================================================== ' + PORT)
