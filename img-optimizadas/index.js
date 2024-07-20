@@ -31,7 +31,7 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Se ha conectado correctamente a la base de datos.");
+    console.log("Se ha conectado correctamente a la base de datos. MONGO ANDERSON");
     const PORT = process.env.PORT || 3000  ;
     app.listen(PORT, function () {
       console.log(
