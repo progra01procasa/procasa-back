@@ -22,20 +22,20 @@ function crearSoliVacaciones(req,res){
 }
 
 
-function obtenerSoliVacacionesxIdentidad(req,res){
-let idUser = req.user.sub
+function obtenerSoliVacacionesxIdentidad(req, res) {
+    let idUser = req.user.sub
 
-SoliVacaciones.find({Usuario:idUser},(err,SoliVacacionesFinded)=>{
-    if(err){
-        return res.status(500).send({message:'error en la peticion'})
-    }else if(SoliVacacionesFinded){
-        return res.status(200).send({data:SoliVacacionesFinded})
-    }else{
-        return res.status(404).send({message:'no se encontro la solicitud'})
-    }
-})
-
+    SoliVacaciones.find({ IdUsuario: idUser }, (err, soliVacacionesFinded) => {
+        if (err) {
+            return res.status(500).send({ message: 'Error en la petición' });
+        } else if (soliVacacionesFinded) {
+            return res.status(200).send({ data: soliVacacionesFinded });
+        } else {
+            return res.status(404).send({ message: 'No se encontraron solicitudes de vacaciones para este usuario' });
+        }
+    });
 }
+
 
 
 module.exports = { 
