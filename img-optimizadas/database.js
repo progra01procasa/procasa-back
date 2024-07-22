@@ -5,7 +5,7 @@ mongoose.Promise = global.Promise;
 mongoose.set('strictQuery', false);
 
 // Conexión a la base de datos del servidor 1
-const db1 = mongoose.createConnection('mongodb+srv://desjr:desjr@interno.g3fzrlc.mongodb.net/?retryWrites=true&w=majority&appName=Interno', {
+const db1 = mongoose.createConnection('mongodb://localhost:27017/', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
