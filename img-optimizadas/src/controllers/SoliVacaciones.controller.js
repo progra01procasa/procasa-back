@@ -23,18 +23,23 @@ function crearSoliVacaciones(req,res){
 
 
 function obtenerSoliVacacionesxIdentidad(req, res) {
-    let idUser = req.user.sub
+    let idUser = req.user.sub;  // Obtener el ID del usuario desde req.user.sub
 
+    // Usar el método find de SoliVacaciones para buscar las solicitudes por IdUsuario
     SoliVacaciones.find({ IdUsuario: idUser }, (err, soliVacacionesFinded) => {
         if (err) {
+            // Manejar error de búsqueda
             return res.status(500).send({ message: 'Error en la petición' });
-        } else if (soliVacacionesFinded) {
+        } else if (soliVacacionesFinded && soliVacacionesFinded.length > 0) {
+            // Si se encontraron solicitudes de vacaciones, enviarlas como respuesta
             return res.status(200).send({ data: soliVacacionesFinded });
         } else {
+            // Si no se encontraron solicitudes de vacaciones para el usuario
             return res.status(404).send({ message: 'No se encontraron solicitudes de vacaciones para este usuario' });
         }
     });
 }
+
 
 
 
