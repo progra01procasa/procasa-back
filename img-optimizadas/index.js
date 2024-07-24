@@ -21,7 +21,7 @@ mongoose.set('strictQuery', false);  // Añade esta línea para evitar la advert
 
 
 mongoose
-  .connect('mongodb://localhost:27017/', {
+  .connect('mongodb://localhost:27017/test', {
     //'mongodb://localhost/procasa'
     // mongodb://localhost:27017/
     // mongodb+srv://anderson:anderson@cluster0.wh2v3jf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0

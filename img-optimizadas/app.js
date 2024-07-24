@@ -23,6 +23,7 @@ const cloudRoutes = require('./src/routes/cloudinary.routes');
 const marcasRoutes = require('./src/routes/marcas.routes');
 const estadosRoutes = require('./src/routes/estados.routes');
 const colaRoutes = require('./src/routes/cola.routes');
+const soliVacaciones = require('./src/routes/SoliVacaciones.routes')
 
 // MIDDLEWARES
 app.use(express.urlencoded({ extended: false }));
@@ -31,7 +32,25 @@ app.use(express.json());
 app.use(cors());
 
 // CARGA DE RUTAS
-app.use("/api", usuarioRoutes, imgsRoutes, mainPageRoutes, misionRoutes,colaRoutes, uneteRoutes, productoRoutes, lineaTiempoRoutes, historiaRoutes, noticiasRoutes, valoresRoutes, subsRoutes, ubicacionesRoutes, cloudRoutes, marcasRoutes, estadosRoutes);
+app.use("/api",
+    usuarioRoutes,
+    imgsRoutes,
+    mainPageRoutes,
+    misionRoutes,
+    colaRoutes,
+    uneteRoutes,
+    productoRoutes,
+    lineaTiempoRoutes,
+    historiaRoutes,
+    noticiasRoutes,
+    valoresRoutes,
+    subsRoutes,
+    ubicacionesRoutes,
+    cloudRoutes,
+    marcasRoutes,
+    estadosRoutes,
+    soliVacaciones
+)
 
 app.use('/uploads', express.static(path.resolve('uploads')));
 app.use('/imgsDefult', express.static(path.resolve('imgsDefult')));

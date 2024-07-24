@@ -1,6 +1,4 @@
-const { id } = require("date-fns/locale");
-const { isDuration } = require("moment");
-const mongoose = require("mongoose");
+const mongoose = require("mongoose")
 
 const Schema = mongoose.Schema
 
@@ -18,6 +16,4 @@ const SoliVacaciones = Schema({
     respuesta: Schema.Types.Mixed
 })
 
-
-
-module.exports = mongoose.model("SoliVacaciones", SoliVacaciones)
+module.exports = mongoose.model("solivacaciones", SoliVacaciones)

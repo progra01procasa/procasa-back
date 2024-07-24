@@ -1,4 +1,4 @@
-const SoliVacaciones = require("../models/SoliVacaciones")
+const SoliVacaciones = require("../models/SoliVacaciones.model")
 
 
 function crearSoliVacaciones(req,res){
@@ -21,24 +21,19 @@ function crearSoliVacaciones(req,res){
     })
 }
 
-
-function obtenerSoliVacacionesxIdentidad(req, res) {
-    let idUser = req.user.sub;  // Obtener el ID del usuario desde req.user.sub
-
-    // Usar el método find de SoliVacaciones para buscar las solicitudes por IdUsuario
-    SoliVacaciones.find({ IdUsuario: idUser }, (err, soliVacacionesFinded) => {
+const obtenerSoliVacacionesxIdentidad = (req, res) => {
+    let idUser = req.user.sub;
+    SoliVacaciones.find({ IdUsuario: idUser }, (err, soliVacaciones) => {
         if (err) {
-            // Manejar error de búsqueda
-            return res.status(500).send({ message: 'Error en la petición' });
-        } else if (soliVacacionesFinded && soliVacacionesFinded.length > 0) {
-            // Si se encontraron solicitudes de vacaciones, enviarlas como respuesta
-            return res.status(200).send({ data: soliVacacionesFinded });
-        } else {
-            // Si no se encontraron solicitudes de vacaciones para el usuario
-            return res.status(404).send({ message: 'No se encontraron solicitudes de vacaciones para este usuario' });
+            return res.status(500).send({ message: 'Error en la petición' })
         }
+        if (!soliVacaciones || soliVacaciones.length === 0) {
+            return res.status(404).send({ message: 'No se encontraron solicitudes de vacaciones para el usuario con id' });
+        }
+        return res.status(200).send({ data: soliVacaciones });
     });
-}
+};
+
 
 
 
