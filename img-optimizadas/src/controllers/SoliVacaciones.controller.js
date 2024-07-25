@@ -5,9 +5,8 @@ function crearSoliVacaciones(req,res){
     let SoliVacacionesModel = new SoliVacaciones();
     let params = req.body;
     let user = req.user.sub;
-    SoliVacacionesModel.nombre = req.user.nombre;
-    SoliVacacionesModel.departamento = req.user.departamento;
-    SoliVacacionesModel.Usuario = user;
+    // SoliVacacionesModel.nombre = req.user.nombre;
+    // SoliVacacionesModel.Usuario = user;
     SoliVacacionesModel.fechaInicio = params.fechaInicio;
     SoliVacacionesModel.fechaFin = params.fechaFin;
     SoliVacacionesModel.estado = params.estado;
