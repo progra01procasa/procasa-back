@@ -10,6 +10,8 @@ function crearSoliVacaciones(req,res){
     SoliVacacionesModel.Usuario = user;
     SoliVacacionesModel.fechaInicio = params.fechaInicio;
     SoliVacacionesModel.fechaFin = params.fechaFin;
+    SoliVacacionesModel.estado = params.estado;
+    SoliVacacionesModel.tipofecha = params.tipofecha;
     SoliVacacionesModel.save((err,SoliVacacionesGuardado)=>{
         if(err){
             return res.status(500).send({message:'error en la peticion'})
@@ -20,6 +22,8 @@ function crearSoliVacaciones(req,res){
         }
     })
 }
+
+
 
 const obtenerSoliVacacionesxIdentidad = (req, res) => {
     let idUser = req.user.sub;
