@@ -1,44 +1,31 @@
+require('dotenv').config();
+
 const mongoose = require("mongoose");
 const app = require("./app");
 const usuarioController = require("./src/controllers/users.controller");
 const lineaController = require("./src/controllers/lineaTiempo.controller");
-const noticasController = require("./src/controllers/noticias.controller");
+const noticiasController = require("./src/controllers/noticias.controller");
 const mainPage = require("./src/controllers/mainPage.controller");
 const historiaController = require('./src/controllers/historia.controller');
-const equipoCOntroller = require('./src/controllers/unete.controller');
+const equipoController = require('./src/controllers/unete.controller');
 const estados = require('./src/controllers/estados.controller');
 
+mongoose.Promise = global.Promise;
+mongoose.set('strictQuery', false);
 
-
-
-mongoose.Promise = global.Promise;     
-mongoose.set('strictQuery', false);  // Añade esta línea para evitar la advertencia
-
-
-//BASE DE DATOS DEL INTERNO 
-//const destinoURI = 'mongodb+srv://desjr:desjr@interno.g3fzrlc.mongodb.net/?retryWrites=true&w=majority&appName=Interno';
-
-
+const dbName = process.env.DATABASE_NAME;
+const mongoUri = `mongodb+srv://anderson:anderson@cluster0.wh2v3jf.mongodb.net/${dbName}?retryWrites=true&w=majority&appName=Cluster0`;
 
 mongoose
-  .connect('mongodb://localhost:27017/test', {
-    //'mongodb://localhost/procasa'
-    // mongodb://localhost:27017/
-    // mongodb+srv://anderson:anderson@cluster0.wh2v3jf.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-    //mongodb+srv://desjr:desjr@cluster0.qmiwvug.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
-        //mongodb+srv://desjr:desjr@interno.g3fzrlc.mongodb.net/?retryWrites=true&w=majority&appName=Interno
-
-
+  .connect(mongoUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log("Se ha conectado correctamente a la base de datos.");
-    const PORT = process.env.PORT || 3000  ;
+    console.log(`Se ha conectado correctamente a la base de datos ${dbName}.`);
+    const PORT = process.env.PORT || 3000;
     app.listen(PORT, function () {
-      console.log(
-        'El servidor está levantado en el puerto ' + PORT
-      );
+      console.log('El servidor está levantado en el puerto ' + PORT);
     });
   })
-  .catch((error) => console.log(error));
+  .catch((error) => console.log('Error al conectar a la base de datos:', error));
