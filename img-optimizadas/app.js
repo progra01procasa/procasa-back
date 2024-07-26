@@ -23,7 +23,8 @@ const cloudRoutes = require('./src/routes/cloudinary.routes');
 const marcasRoutes = require('./src/routes/marcas.routes');
 const estadosRoutes = require('./src/routes/estados.routes');
 const colaRoutes = require('./src/routes/cola.routes');
-const soliVacaciones = require('./src/routes/SoliVacaciones.routes')
+const soliVacaciones = require('./src/routes/SoliVacaciones.routes');
+const solicitudBoletaPagoModel = require("./src/models/solicitudBoletaPago.model");
 
 // MIDDLEWARES
 app.use(express.urlencoded({ extended: false }));
@@ -49,7 +50,8 @@ app.use("/api",
     cloudRoutes,
     marcasRoutes,
     estadosRoutes,
-    soliVacaciones
+    soliVacaciones,
+    solicitudBoletaPagoModel
 )
 
 app.use('/uploads', express.static(path.resolve('uploads')));
