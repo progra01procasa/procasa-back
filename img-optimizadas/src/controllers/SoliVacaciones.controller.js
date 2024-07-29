@@ -12,9 +12,12 @@ function crearSoliVacaciones(req, res) {
     // SoliVacacionesModel.nombre = req.user.nombre;
     // SoliVacacionesModel.Usuario = user;
     SoliVacacionesModel.fechaInicio = params.fechaInicio;
+    SoliVacacionesModel.diasDisponibles = 0;
     SoliVacacionesModel.fechaFin = params.fechaFin;
     SoliVacacionesModel.estado = "recibida";
     SoliVacacionesModel.tipofecha = params.tipofecha;
+    SoliVacacionesModel.email = params.email;
+    SoliVacacionesModel.respuesta = "";
     SoliVacacionesModel.save((err, SoliVacacionesGuardado) => {
         if (err) {
             return res.status(500).send({ message: 'Error en la petición' });
@@ -39,8 +42,8 @@ const obtenerSoliVacacionesxIdentidad = (req, res) => {
             return res.status(404).send({ message: 'No se encontraron solicitudes de vacaciones para el usuario con id' });
         }
         return res.status(200).send({ data: soliVacaciones });
-    });
-};
+    })
+}
 
 
 

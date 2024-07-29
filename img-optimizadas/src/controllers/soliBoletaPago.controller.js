@@ -1,39 +1,47 @@
-const SoliVacaciones = require("../models/solicitudBoletaPago.model")
+const SoliBoleta = require("../models/solicitudBoletaPago.model")
 
 
 function crearSolicitudBoletaPago(req, res) {
-    // let SoliVacacionesModel = new SoliVacaciones();
-    // let params = req.body;
-    // let user = req.user.sub;
+    let SoliBoletaModel = new SoliBoleta();
+    let params = req.body;
+    let user = req.user.sub;
+    
+    // SoliBoletaModel.nombre = req.user.nombre;
+    // SoliBoletaModel.Usuario = user;
+    SoliBoletaModel.codigo = params.codigo;
+    SoliBoletaModel.IdUsuario = params.IdUsuario;
+    SoliBoletaModel.estado = params.estado;
+    SoliBoletaModel.email = params.email;
+    SoliBoletaModel.tipoBoleta = params.tipoBoleta;
+    SoliBoletaModel.mes = params.mes;
+    SoliBoletaModel.respuesta = params.respuesta;
 
-    // // Asignar los valores al modelo
-    // SoliVacacionesModel.IdUsuario = params.IdUsuario;
-    // SoliVacacionesModel.codigo = params.codigo;
-    // // SoliVacacionesModel.nombre = req.user.nombre;
-    // // SoliVacacionesModel.Usuario = user;
-    // SoliVacacionesModel.fechaInicio = params.fechaInicio;
-    // SoliVacacionesModel.fechaFin = params.fechaFin;
-    // SoliVacacionesModel.estado = "recibida";
-    // SoliVacacionesModel.tipofecha = params.tipofecha;
-    // SoliVacacionesModel.save((err, SoliVacacionesGuardado) => {
-    //     if (err) {
-    //         return res.status(500).send({ message: 'Error en la petición' });
-    //     }
-    //     if (SoliVacacionesGuardado) {
-    //         return res.status(200).send({ data: SoliVacacionesGuardado });
-    //     }
-    //     return res.status(404).send({ message: 'No se pudo guardar' });
-    // });
+    SoliBoletaModel.save((err, SoliBoletaGuardado) => {
+        if (err) {
+            return res.status(500).send({ message: 'Error en la petición' });
+        }
+        if (SoliBoletaGuardado) {
+            return res.status(200).send({ data: SoliBoletaGuardado });
+        }
+        return res.status(404).send({ message: 'No se pudo guardar' });
+    })
 }
 
 
 
 
 const obtenerBoletaPagoId = (req, res) => {
-};
-
-
-
+    let idUser = req.user.sub;
+    SoliBoleta.find({ IdUsuario: idUser }, (err, soliBoleta) => {
+        if (err) {
+            return res.status(500).send({ message: 'Error en la petición' })
+        }
+        if (!soliBoleta || soliBoleta.length === 0) {
+            return res.status(404).send({ message: 'No se encontraron solicitudes de vacaciones para el usuario con id' });
+        }
+        return res.status(200).send({ data: soliBoleta })
+    })
+}
 
 
 module.exports = {
