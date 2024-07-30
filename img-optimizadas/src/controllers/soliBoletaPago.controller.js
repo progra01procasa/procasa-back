@@ -8,8 +8,8 @@ function crearSolicitudBoletaPago(req, res) {
     
     // SoliBoletaModel.nombre = req.user.nombre;
     // SoliBoletaModel.Usuario = user;
-    SoliBoletaModel.codigo = params.codigo;
     SoliBoletaModel.IdUsuario = params.IdUsuario;
+    SoliBoletaModel.codigo = params.codigo;
     SoliBoletaModel.estado = params.estado;
     SoliBoletaModel.email = params.email;
     SoliBoletaModel.tipoBoleta = params.tipoBoleta;

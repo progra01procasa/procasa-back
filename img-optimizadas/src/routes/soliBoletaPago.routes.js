@@ -1,12 +1,10 @@
 const express = require('express')
-const SoliController = require('../controllers/')
+const SolicitudBoletaPago = require('../controllers/soliBoletaPago.controller');
 const md_auteticacion = require('../middlewares/autenticacion');
-const solicitudBoletaPagoModel = require('../models/solicitudBoletaPago.model');
-const { crearSolicitudBoletaPago, obtenerBoletaPagoId } = require('../controllers/soliBoletaPago.controller');
-const api = express.Router();
+const api = express.Router()
 
 
-api.post('/crearBoletaPago', md_auteticacion.Auth, crearSolicitudBoletaPago)
-api.get('/soliBoletaPago/:IdUsuario', md_auteticacion.Auth, obtenerBoletaPagoId)
+api.post('/ingresarBoletaPago', md_auteticacion.Auth, SolicitudBoletaPago.crearSolicitudBoletaPago)
+api.get('/obtenerBoletaPago/:IdUsuario', md_auteticacion.Auth, SolicitudBoletaPago.obtenerBoletaPagoId)
 
 module.exports = api

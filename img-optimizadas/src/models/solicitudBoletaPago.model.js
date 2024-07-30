@@ -12,4 +12,4 @@ const SoliBoletaPago = Schema({
     respuesta: String,
 })
 
-module.exports = mongoose.model("soliboleta", SoliBoletaPago)
+module.exports = mongoose.model("soliboletas", SoliBoletaPago)

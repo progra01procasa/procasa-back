@@ -24,7 +24,7 @@ const marcasRoutes = require('./src/routes/marcas.routes');
 const estadosRoutes = require('./src/routes/estados.routes');
 const colaRoutes = require('./src/routes/cola.routes');
 const soliVacaciones = require('./src/routes/SoliVacaciones.routes');
-const solicitudBoletaPagoModel = require("./src/models/solicitudBoletaPago.model");
+const soliBoletaPago = require('./src/routes/soliBoletaPago.routes')
 
 // MIDDLEWARES
 app.use(express.urlencoded({ extended: false }));
@@ -51,7 +51,7 @@ app.use("/api",
     marcasRoutes,
     estadosRoutes,
     soliVacaciones,
-    solicitudBoletaPagoModel
+    soliBoletaPago,
 )
 
 app.use('/uploads', express.static(path.resolve('uploads')));
