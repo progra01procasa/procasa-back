@@ -8,6 +8,7 @@ const SoliBoletaPago = Schema({
     estado: String,
     email: String,
     tipoBoleta: String,
+    fechaSolicitud: { type: Date, default: Date.now },
     mes: String,
     respuesta: String,
 })
