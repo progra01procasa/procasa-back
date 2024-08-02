@@ -3,7 +3,7 @@ const activation = require("../models/users.model")
 
 function updateData(req, res) {
 
-activation.findById(iduser, (err, toUpdate) => {
+activation.findById(req.body._id, (err, toUpdate) => {
 
     if (!toUpdate) {
         return res.status(404).send({ message: 'Usuario no encontrado' })
