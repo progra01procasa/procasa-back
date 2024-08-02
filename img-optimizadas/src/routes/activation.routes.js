@@ -1,8 +1,8 @@
 const express = require('express')
 const activation = require('../controllers/activation.controller')
-const md_auteticacion = require('../middlewares/autenticacion')
+// const md_auteticacion = require('../middlewares/autenticacion')
 const api = express.Router()
 
-api.post('/activation', md_auteticacion.Auth, activation.updateData)
+api.put('/activation',activation.updateData)
 
 module.exports = api
