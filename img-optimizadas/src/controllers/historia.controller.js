@@ -46,6 +46,10 @@ async function obtenerHistoria(req,res){
     })
 }
 
+
+
+
+
 function editarhistoria(req,res){
 
     let  idHistoria = req.params.idHistoria
@@ -101,6 +105,10 @@ function editarhistoria(req,res){
     })
 
 }
+
+
+
+
 function EditarFondo(req,res){
 
     let  idHistoria = req.params.idHistoria
