@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 
 const UsuarioSchema = Schema({
+  _id: Schema.Types.ObjectId,
   nombre: String,
   email: String,
   password: String,
@@ -11,4 +12,4 @@ const UsuarioSchema = Schema({
   nacimiento: Date
 });
 
-module.exports = mongoose.model("Usuarios", UsuarioSchema);
+module.exports = mongoose.model("usuarios", UsuarioSchema);
