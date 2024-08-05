@@ -1,6 +1,5 @@
 require('dotenv').config()
 
-
 const mongoose = require("mongoose");
 const app = require("./app");
 const usuarioController = require("./src/controllers/users.controller");

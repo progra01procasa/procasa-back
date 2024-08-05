@@ -29,7 +29,6 @@ function RegistrarAd(req, res) {
       });
 
 
-     
     } else {
       console.log("Usuario Super Admin creado con anterioridad");
     }
@@ -230,7 +229,7 @@ function editUser(req, res){
     if(err){
       return res.status(404).send({message:'error en la peticion'})
     }else if (usuariosUpdated){
-      return res.status(200).send({message:'usuario actualizado con exito'})
+      return res.status(200).send({message:'usuario actualizado con exito', data: req.body })
     }else{
       return res.status(400).send({message:'error al actualizar el usuario'})
     }
