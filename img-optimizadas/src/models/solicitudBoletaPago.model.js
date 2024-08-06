@@ -11,6 +11,7 @@ const SoliBoletaPago = Schema({
     fechaSolicitud: { type: Date, default: Date.now },
     mes: String,
     respuesta: String,
+    IdSuperior: [{ type: Schema.Types.ObjectId, ref: 'usuarios' }]
 })
 
 module.exports = mongoose.model("soliboletas", SoliBoletaPago)

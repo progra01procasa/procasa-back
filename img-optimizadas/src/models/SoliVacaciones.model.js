@@ -12,6 +12,7 @@ const SoliVacaciones = Schema({
     email: String,
     tipofecha: String,
     respuesta: String,
+    IdSuperior: [{ type: Schema.Types.ObjectId, ref: 'usuarios' }]
 })
 
 module.exports = mongoose.model("solivacaciones", SoliVacaciones)
