@@ -8,7 +8,6 @@ function crearSolicitudBoletaPago(req, res) {
     SoliBoletaModel.codigo = params.codigo;
     SoliBoletaModel.estado = params.estado;
     SoliBoletaModel.email = params.email;
-    SoliBoletaModel.tipoBoleta = params.tipoBoleta;
     SoliBoletaModel.mes = params.mes;
     SoliBoletaModel.respuesta = '';
 
