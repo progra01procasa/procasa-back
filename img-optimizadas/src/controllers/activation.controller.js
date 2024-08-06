@@ -1,44 +1,48 @@
 const mongoose = require('mongoose');
 const activation = require("../models/users.model");
 
-function updateData(req, res) {
-    if (!req.body._id) {
+async function updateData(req, res) {
+    const { _id, nacimiento, password, estado } = req.body;
+
+    // Valor por defecto para estado si no se proporciona
+    const estadoFinal = estado || 'activo';
+
+    if (!_id) {
         return res.status(400).send({ message: 'ID is required' });
     }
 
-    const id = mongoose.Types.ObjectId(req.body._id);
-    const { nacimiento, password } = req.body;
+    try {
+        const id = mongoose.Types.ObjectId(_id);
+        const toUpdate = await activation.findById(id);
 
-    activation.findById(id, (err, toUpdate) => {
-        if (err) {
-            return res.status(500).send({ message: 'Error finding record', data: req.body });
-        }
         if (!toUpdate) {
-            return res.status(404).send({ message: 'Record not found', data: req.body });
+            return res.status(404).send({ message: 'Record not found' });
         }
-
-        // Convert MongoDB date to yyyy-mm-dd format
-        const mongoDate = toUpdate.nacimiento.toISOString().split('T')[0];
 
         // Compare dates
-        if (mongoDate !== nacimiento) {
-            return res.status(400).send({ message: 'Nacimiento does not match', data: req.body });
+        const mongoDate = toUpdate.nacimiento.toISOString().split('T')[0];
+        const requestDate = new Date(nacimiento).toISOString().split('T')[0];
+
+        if (mongoDate !== requestDate) {
+            return res.status(200).send({ date: null });
         }
 
-        // Update the password
+        // Update the password and estado
         toUpdate.password = password;
+        toUpdate.estado = estadoFinal;
 
-        toUpdate.save((saveErr, updatedRecord) => {
-            if (saveErr) {
-                return res.status(500).send({ message: 'Error updating record' });
-            }
-            // Return success message with updated record
-            return res.status(200).send({
-                message: 'Password updated successfully',
-                updatedRecord: updatedRecord
-            });
+        const updatedRecord = await toUpdate.save();
+
+        // Return success message with updated record
+        return res.status(200).send({
+            message: 'Password and estado updated successfully',
+            status: 200,
+            updatedRecord
         });
-    });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).send({ message: 'Error processing request' });
+    }
 }
 
 module.exports = {

@@ -1,8 +1,7 @@
-const express = require('express')
-const activation = require('../controllers/activation.controller')
-// const md_auteticacion = require('../middlewares/autenticacion')
-const api = express.Router()
+const express = require('express');
+const activation = require('../controllers/activation.controller');
+const api = express.Router();
 
-api.put('/activation', activation.updateData)
+api.put('/updatepass', activation.updateData);
 
-module.exports = api
+module.exports = api;
