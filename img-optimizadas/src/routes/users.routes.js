@@ -18,5 +18,4 @@ api.post('/login', controladorUsuario.Login);
 api.post('/loginnn', controladorUsuario.login2 );
 
 
-
 module.exports = api;

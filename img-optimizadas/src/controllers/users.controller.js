@@ -199,7 +199,7 @@ function ObtenerGerencia(req, res) {
     if (err) {
       return res.status(500).send('Error en la petición 1');
     } else if (usuariosEncontrados) {
-      return res.status(200).send({ usuario: usuariosEncontrados });
+      return res.status(200).send({ gerente: usuariosEncontrados });
     } else {
       return res.send({ mensaje: 'Error al obtener usuarios' });
     }
