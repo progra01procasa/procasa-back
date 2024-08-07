@@ -193,6 +193,20 @@ function ObtenerUsuarios(req, res) {
   });
 }
 
+
+function ObtenerGerencia(req, res) {
+  Usuario.find({ rol: req.body.rol }, (err, usuariosEncontrados) => {
+    if (err) {
+      return res.status(500).send('Error en la petición 1');
+    } else if (usuariosEncontrados) {
+      return res.status(200).send({ usuario: usuariosEncontrados });
+    } else {
+      return res.send({ mensaje: 'Error al obtener usuarios' });
+    }
+  });
+}
+
+
 function ObterneruserLog(req, res) {
   var user = req.user.sub;
   Usuario.findById(user, (err, usuarioEncontrado) => {
@@ -249,5 +263,6 @@ module.exports = {
   ObterneruserLog,
   editUser,
   CrearAgenteMarketing,
-  login2
+  login2,
+  ObtenerGerencia
 };

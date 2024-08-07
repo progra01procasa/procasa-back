@@ -6,6 +6,7 @@ const api = express.Router();
 
 api.post('/registrarUsuario', controladorUsuario.RegistrarUsuario);
 api.get("/obtenerUsuarios",controladorUsuario.ObtenerUsuarios);
+api.post("/obtenerGerencia",controladorUsuario.ObtenerGerencia);
 api.get("/obtenerUsuarioId/:idUsuario",controladorUsuario.ObtenerUsuarioId);
 api.post('/registrarUsuario/',controladorUsuario.RegistrarUsuario)
 api.put('/editarUsuario/:idUsers' ,controladorUsuario.editUser);
