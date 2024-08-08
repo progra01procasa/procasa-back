@@ -14,7 +14,8 @@ const UsuarioSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'areas',
     default: null
-  }
+  },
+  rango: String
 }, {
   timestamps: true
 })
